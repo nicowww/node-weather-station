@@ -29,11 +29,15 @@ var config = {};
    \_______________________/
 */
 // Adress configuration
-config.address = '192.168.0.17';
+//config.address = '192.168.0.17';
 
 // Led configuration
 config.pin_led = 13;
 config.freq_led = 1000;
+
+// Luminosity sensor configuration
+config.pin_luminosity = 'A5';
+config.freq_luminosity = 1000;
 
 // Motion sensor configuration
 config.pin_motion = 7;

@@ -12,7 +12,7 @@ var config = require('./config/config.js');
 
 var board, led, sensor, motion;
 
-logger.log('Station', 'Start Engine');
+logger.log('station', 'Start Engine');
 
 app.use(helmet());
 
@@ -24,8 +24,8 @@ board = new five.Board();
 
 // on board ready
 board.on("ready", function() {
-	logger.log('Station', 'Board connected');
-	logger.log('Station', 'Init control & sensors');
+	logger.log('station', 'Board connected');
+	logger.log('station', 'Init control & sensors');
 
 	// init a led on pin 13, strobe every 1000ms
 	led = new five.Led(config.pin_led).strobe(config.freq_led);
@@ -33,17 +33,24 @@ board.on("ready", function() {
 	// init Motion sensor
 	motion = new five.Motion(config.pin_motion);
 	
+	// init temperature sensor	
 	sensor = new five.Sensor({
 		pin: config.pin_sensor,
 		freq: config.freq_sensor
 	});
+	
+	// init luminosity sensor
+	luminosity = new five.Sensor({
+		pin: config.pin_luminosity,
+		freq: config.freq_luminosity
+	});
 
-	logger.log('Station', 'Running');
+	logger.log('station', 'Running');
 });
 
 app.get('/', function(req, res){
 	res.render('index.ejs');
-	logger.log('User', 'User enter');
+	logger.log('user', 'User enter');
 });
 
 // on a socket connection
@@ -52,36 +59,43 @@ io.sockets.on('connection', function (socket) {
 	
 	// if board is ready
 	if(board.isReady){
+		
 		// read in sensor data, pass to browser
 		sensor.on("data",function(){
 			var analogValueTemp = this.raw;
 			var voltage = (analogValueTemp * 5.0) / 1024;
 			var temperature = voltage * 100;
 			socket.emit('sensor', { raw: Math.round(temperature) + 'C' });
-			//console.info("Sensor: ".bot_note + "Send".warn);
+			//logger.log('component', Math.round(temperature) + 'C');
+		});
+
+		luminosity.on("data", function(){
+			var percent = ((1023 - this.value) / 1024) * 100;
+			socket.emit('luminosity', { raw: percent + '%'});
+			//logger.log('component', percent + '%');
 		});
 
 		// "calibrated" occurs once, at the beginning of a session,
  		motion.on("calibrated", function() {
-   			logger.log("calibrated");
+   			logger.log('component', 'calibrated');
 		});
 
 		// "motionstart" events are fired when the "calibrated"
 		// proximal area is disrupted, generally by some form of movement
 		motion.on("motionstart", function() {
-			logger.log("motionstart");
+			logger.log('component', 'motionstart');
 		});
 
 		// "motionend" events are fired following a "motionstart" event
 		// when no movement has occurred in X ms
 		motion.on("motionend", function() {
-			logger.log("motionend");
+			logger.log('component', 'motionend');
 		});
 	}
 
 	// if led message received
 	socket.on('led', function (data) {
-		logger.log('Component', data);
+		logger.log('component', data);
 		if(board.isReady){ led.strobe(data.delay); }
 	});
 });
