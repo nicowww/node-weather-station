@@ -14,10 +14,17 @@
     "socket.io": "^1.3.7",
     "winston": "^2.1.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicowww/node-weather-station.git"
+  },
   "author": "nmontfort",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicowww/node-weather-station/issues"
+  },
+  "homepage": "https://github.com/nicowww/node-weather-station#readme"
 }
