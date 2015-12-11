@@ -1,5 +1,13 @@
 # node-weather-station
 
+## Material
+This is a list of all the components that are required for this project:
+* Arduino Uno
+* LM35 sensor
+* Motion sensor
+* Luminosity sensor
+* Breadboard and some jumper wires
+
 ## Install Firmata firmware
 Download gort[http://gort.io/]
 
