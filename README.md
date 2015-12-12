@@ -1,5 +1,5 @@
 # node-weather-station
-
+![Alt text](/public/css/patterns/header-profile.png?raw=true "Test image")
 ## Material
 This is a list of all the components that are required for this project:
 * Arduino Uno
@@ -26,6 +26,9 @@ $ gort arduino upload firmata /dev/ttyACM0
 $ npm install
 ```
 
+## Configure
+open config file config/config.js and change address/port/arduino pin
+
 ## Start app
 via node
 ``` bash
@@ -43,3 +46,4 @@ via pm2
 $ npm -g install pm2
 $ pm2 start app.js
 ```
+and browse localhost:1337
