@@ -73,7 +73,7 @@ io.sockets.on('connection', function (socket) {
 
 		luminosity.on("data", function(){
 			var percent = ((1023 - this.value) / 1024) * 100;
-			socket.emit('luminosity', { raw: percent + '%'});
+			socket.emit('luminosity', { raw: Math.round(percent) + '%'});
 			//logger.log('component', percent + '%');
 		});
 

@@ -1,5 +1,5 @@
 # node-weather-station
-![Alt text](/public/css/patterns/header-profile.png?raw=true "Test image")
+![Alt text](/public/img/Capture201512.png?raw=true "Screen")
 ## Material
 This is a list of all the components that are required for this project:
 * Arduino Uno
@@ -27,7 +27,11 @@ $ npm install
 ```
 
 ## Configure
-open config file config/config.js and change address/port/arduino pin
+open config file
+``` bash
+$ config/config.js
+```
+and change address/port/arduino pin
 
 ## Start app
 via node

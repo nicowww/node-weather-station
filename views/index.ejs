@@ -56,11 +56,6 @@
 				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
 					<div class="navbar-header">
 						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-						<form role="search" class="navbar-form-custom" method="post" action="search_results.html">
-							<div class="form-group">
-								<input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-							</div>
-						</form>
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
 						<li>
@@ -72,13 +67,10 @@
 							</a>
 						</li>
 					</ul>
-
 				</nav>
 			</div>
 
-
 			<!-- Content Wrapper. Contains page content -->
-
 			<div class="row wrapper border-bottom white-bg page-heading">
 				<div class="col-lg-9">
 					<h2>Dashboard</h2>
@@ -101,50 +93,81 @@
 									<i class="fa fa-cloud fa-5x"></i>
 								</div>
 								<div class="col-xs-8 text-right">
-									<span> Today degrees </span>
+									<span> Degrees </span>
 									<h2 id="sensor" class="font-bold"></h2>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="widget style1 yellow-bg">
+							<div class="row">
+								<div class="col-xs-4">
+									<i class="fa fa-sun-o fa-5x"></i>
+								</div>
+								<div class="col-xs-8 text-right">
+									<span> Luminosity </span>
+									<h2 id="luminosity" class="font-bold"></h2>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="content-wrapper">
-				<section class="content">
-					<div class="row">
-						<div class="col-md-4">
-							<h4>Temperature sensor</h4>
-							<textarea class="form-control" style="background:#222; color:#00ff00;" rows="8" id="inData"></textarea>
-						</div>
-
-						<div class="col-md-4">
-							<h4>LED Pulse Delay (ms)</h4>
-							<p><input type="text" class="form-control" id="ledDelay" name="ledDelay" value="1000" /></p>
-							<p><button id="ledSet" class="btn btn-primary">Set Delay</button></p>
+			
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>LED Pulse <small>Delay (ms)</small></h5>
+								<div class="ibox-tools">
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+										<i class="fa fa-wrench"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-user">
+										<li><a href="#">Config option 1</a>
+										</li>
+										<li><a href="#">Config option 2</a>
+										</li>
+									</ul>
+									<a class="close-link">
+										<i class="fa fa-times"></i>
+									</a>
+								</div>
+							</div>
+							<div class="ibox-content">
+										<form role="form">
+											<div class="form-group"><label>Delay</label> <input type="text" class="form-control" id="ledDelay" name="ledDelay" value="1000" /></div>
+											<div>
+												<button id="ledSet" class="btn btn-primary">Set Delay</button>
+											</div>
+										</form>
+							</div>
 						</div>
 					</div>
-				</section>
-			</div>
+				</div>
 
-			<div class="footer">
-				<div>
-					<strong>Copyright</strong> Nicowww &copy; 2014-2015
+				<div class="footer">
+					<div>
+						<strong>Copyright</strong> Nicowww &copy; 2014-2015
+					</div>
 				</div>
 			</div>
-		</div>
-		<script src="/js/dependencies/jquery-2.1.1.js"></script>
-		<script src="/js/dependencies/bootstrap.min.js"></script>
-		<script src="/js/plugins/jquery.metisMenu.js"></script>
-		<script src="/js/plugins/jquery.slimscroll.min.js"></script>
-		<script src="/js/inspinia.js"></script>
-		<script src="/js/plugins/pace.min.js"></script>
-		<script src="/js/plugins/jquery-ui.min.js"></script>
-		<script src="/js/plugins/jquery.gritter.min.js"></script>
-		<script src="/js/plugins/Chart.min.js"></script>
-		<script src="/js/plugins/toastr.min.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="config.js"></script>
-		<script src="js/init.js"></script>
-	</body>
-	</html>
+			<script src="/js/dependencies/jquery-2.1.1.js"></script>
+			<script src="/js/dependencies/bootstrap.min.js"></script>
+			<script src="/js/plugins/jquery.metisMenu.js"></script>
+			<script src="/js/plugins/jquery.slimscroll.min.js"></script>
+			<script src="/js/inspinia.js"></script>
+			<script src="/js/plugins/pace.min.js"></script>
+			<script src="/js/plugins/jquery-ui.min.js"></script>
+			<script src="/js/plugins/jquery.gritter.min.js"></script>
+			<script src="/js/plugins/Chart.min.js"></script>
+			<script src="/js/plugins/toastr.min.js"></script>
+			<script src="/socket.io/socket.io.js"></script>
+			<script src="config.js"></script>
+			<script src="js/init.js"></script>
+		</body>
+		</html>

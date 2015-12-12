@@ -6,10 +6,12 @@ socket.on('news', function (data) {
 
 socket.on('sensor', function (data) {
 	console.log("Incoming sensor data:", data.raw);
-	$("#inData").append(data.raw+"\r");
 	$("#sensor").html(data.raw);
-	//$("#tempData").html(data.raw);
-	$("#inData").animate({scrollTop:$("#inData")[0].scrollHeight - $("#inData").height()},200);
+});
+
+socket.on('luminosity', function (data) {
+	console.log("Incoming luminosity data:", data.raw);
+	$("#luminosity").html(data.raw);
 });
 
 $('#ledSet').on('click',function(){
