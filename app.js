@@ -1,14 +1,15 @@
 // initialize everything, web server, socket.io, filesystem, johnny-five
 var express = require('express');
 var helmet = require('helmet');
+var logger = require('./libs/logger.js');
+var config = require('./config/config.js');
 var app = express();
-var server = app.listen(1337);
+var server = app.listen(config.port);
 var io = require('socket.io').listen(server);
 var path = require('path');
 var fs = require('fs');
 var five = require("johnny-five");
-var logger = require('./libs/logger.js');
-var config = require('./config/config.js');
+
 
 var board, led, sensor, motion;
 
@@ -17,6 +18,7 @@ logger.log('station', 'Start Engine');
 app.use(helmet());
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/config'));
 
 app.set('views', __dirname + '/views');
 
@@ -32,13 +34,13 @@ board.on("ready", function() {
 
 	// init Motion sensor
 	motion = new five.Motion(config.pin_motion);
-	
-	// init temperature sensor	
+
+	// init temperature sensor
 	sensor = new five.Sensor({
 		pin: config.pin_sensor,
 		freq: config.freq_sensor
 	});
-	
+
 	// init luminosity sensor
 	luminosity = new five.Sensor({
 		pin: config.pin_luminosity,
@@ -56,16 +58,16 @@ app.get('/', function(req, res){
 // on a socket connection
 io.sockets.on('connection', function (socket) {
 	socket.emit('news', { hello: 'world' });
-	
+
 	// if board is ready
 	if(board.isReady){
-		
+
 		// read in sensor data, pass to browser
 		sensor.on("data",function(){
 			var analogValueTemp = this.raw;
 			var voltage = (analogValueTemp * 5.0) / 1024;
 			var temperature = voltage * 100;
-			socket.emit('sensor', { raw: Math.round(temperature) + 'C' });
+			socket.emit('sensor', { raw: Math.round(temperature) + '°C' });
 			//logger.log('component', Math.round(temperature) + 'C');
 		});
 
@@ -76,8 +78,8 @@ io.sockets.on('connection', function (socket) {
 		});
 
 		// "calibrated" occurs once, at the beginning of a session,
- 		motion.on("calibrated", function() {
-   			logger.log('component', 'calibrated');
+		motion.on("calibrated", function() {
+			logger.log('component', 'calibrated');
 		});
 
 		// "motionstart" events are fired when the "calibrated"

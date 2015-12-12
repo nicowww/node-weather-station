@@ -6,12 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Weather Station</title>
 	<!--CSS Files-->
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<link rel="stylesheet" href="css/AdminLTE.css">
-	<link rel="stylesheet" href="css/_all-skins.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/plugins/toastr.min.css">
+	<link rel="stylesheet" href="/css/plugins/jquery.gritter.css">
+	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/style.css">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -19,73 +19,132 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
- <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
-		<header class="main-header">
-		    <!-- Logo -->
-		    <a href="index.html" class="logo">
+<body>
+	<div id="wrapper">
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="nav-header">
+						<div class="dropdown profile-element"> <span>
+							<img alt="image" class="img-circle" src="img/profile_small.jpg" />
+						</span>
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Admin</strong>
+							</span> <span class="text-muted text-xs block">Administator <b class="caret"></b></span> </span> </a>
+							<ul class="dropdown-menu animated fadeInRight m-t-xs">
+								<li><a href="profile.html">Profile</a></li>
+								<li><a href="contacts.html">Contacts</a></li>
+								<li><a href="mailbox.html">Mailbox</a></li>
+								<li class="divider"></li>
+								<li><a href="login.html">Logout</a></li>
+							</ul>
+						</div>
+						<div class="logo-element">
+							WS+
+						</div>
+					</li>
+					<li class="active">
+						<a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="label label-primary pull-right">NEW</span></a>
+					</li>
+				</ul>
 
-		      <!-- mini logo for sidebar mini 50x50 pixels -->
-		      <span class="logo-mini"><i class="icon ion-ios-pulse"></i></span>
-		      <!-- logo for regular state and mobile devices -->
-		      <span class="logo-lg"><i class="icon ion-ios-pulse"></i> <b>W</b>eather</span>
-		    </a>
-		    <!-- Header Navbar: style can be found in header.less -->
-		    <nav class="navbar navbar-static-top" role="navigation">
-		      <!-- Sidebar toggle button-->
-		      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-		        <span class="sr-only">Toggle navigation</span>
-		      </a>
-		    </nav>
-		</header>
-		<!-- Left side column. contains the logo and sidebar -->
-		<aside class="main-sidebar">
-		<!-- sidebar: style can be found in sidebar.less -->
-		<section class="sidebar">
-		  <!-- sidebar menu: : style can be found in sidebar.less -->
-		  <ul class="sidebar-menu">
-			<li class="header">MAIN NAVIGATION</li>
-			<li class="active treeview">
-			  <a href="#">
-				<i class="fa fa-dashboard"></i> <span>Control</span>
-			  </a>
-			</li>
-			<li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-		  </ul>
-		</section>
-		<!-- /.sidebar -->
-		</aside>
-	</div>
+			</div>
+		</nav>
 
-	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-		<section class="content">
-			<div class="row">
-				<div class="col-md-4">
-					<h4>Temperature sensor</h4>
-					<textarea class="form-control" style="background:#222; color:#00ff00;" rows="8" id="inData"></textarea>
-				</div>
-				
-				<div class="col-md-4">
-					<h4>LED Pulse Delay (ms)</h4>
-					<p><input type="text" class="form-control" id="ledDelay" name="ledDelay" value="1000" /></p>
-					<p><button id="ledSet" class="btn btn-primary">Set Delay</button></p>
+		<div id="page-wrapper" class="gray-bg dashbard-1">
+			<div class="row border-bottom">
+				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+					<div class="navbar-header">
+						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+						<form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+							<div class="form-group">
+								<input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+							</div>
+						</form>
+					</div>
+					<ul class="nav navbar-top-links navbar-right">
+						<li>
+							<span class="m-r-sm text-muted welcome-message">Welcome to Weather Station.</span>
+						</li>
+						<li>
+							<a href="login">
+								<i class="fa fa-sign-out"></i> Log out
+							</a>
+						</li>
+					</ul>
+
+				</nav>
+			</div>
+
+
+			<!-- Content Wrapper. Contains page content -->
+
+			<div class="row wrapper border-bottom white-bg page-heading">
+				<div class="col-lg-9">
+					<h2>Dashboard</h2>
+					<ol class="breadcrumb">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li class="active">
+							<strong>Dashboard</strong>
+						</li>
+					</ol>
 				</div>
 			</div>
-		</section>
-	</div>
+			<div class="wrapper wrapper-content animated fadeInRight">
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="widget style1 navy-bg">
+							<div class="row">
+								<div class="col-xs-4">
+									<i class="fa fa-cloud fa-5x"></i>
+								</div>
+								<div class="col-xs-8 text-right">
+									<span> Today degrees </span>
+									<h2 id="sensor" class="font-bold"></h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-	<footer class="main-footer">
-  </footer>
+			<div class="content-wrapper">
+				<section class="content">
+					<div class="row">
+						<div class="col-md-4">
+							<h4>Temperature sensor</h4>
+							<textarea class="form-control" style="background:#222; color:#00ff00;" rows="8" id="inData"></textarea>
+						</div>
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/demo.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="js/keypress.js"></script>
-	<script src="js/init.js"></script>
-</body>
-</html>
+						<div class="col-md-4">
+							<h4>LED Pulse Delay (ms)</h4>
+							<p><input type="text" class="form-control" id="ledDelay" name="ledDelay" value="1000" /></p>
+							<p><button id="ledSet" class="btn btn-primary">Set Delay</button></p>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<div class="footer">
+				<div>
+					<strong>Copyright</strong> Nicowww &copy; 2014-2015
+				</div>
+			</div>
+		</div>
+		<script src="/js/dependencies/jquery-2.1.1.js"></script>
+		<script src="/js/dependencies/bootstrap.min.js"></script>
+		<script src="/js/plugins/jquery.metisMenu.js"></script>
+		<script src="/js/plugins/jquery.slimscroll.min.js"></script>
+		<script src="/js/inspinia.js"></script>
+		<script src="/js/plugins/pace.min.js"></script>
+		<script src="/js/plugins/jquery-ui.min.js"></script>
+		<script src="/js/plugins/jquery.gritter.min.js"></script>
+		<script src="/js/plugins/Chart.min.js"></script>
+		<script src="/js/plugins/toastr.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="config.js"></script>
+		<script src="js/init.js"></script>
+	</body>
+	</html>
