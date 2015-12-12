@@ -1,9 +1,7 @@
-//var config = require('../../config/config.js');
-//var address = config.address;
-//console.log(address);
-var address = '192.168.0.17';
+var address = 'localhost';
+var port = 1337;
 
-var socket = io.connect('http://' + address);
+var socket = io.connect('http://' + address + ':' + port);
 
 socket.on('news', function (data) {
 	console.log(data);
