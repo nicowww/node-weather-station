@@ -9,7 +9,9 @@ var io = require('socket.io').listen(server);
 var path = require('path');
 var fs = require('fs');
 var five = require("johnny-five");
-
+var os = require('os');
+var temporal = require("temporal");
+var moment = require('moment');
 
 var board, led, sensor, motion;
 
@@ -21,6 +23,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/config'));
 
 app.set('views', __dirname + '/views');
+
+moment.locale('fr');
 
 board = new five.Board();
 
@@ -51,13 +55,16 @@ board.on("ready", function() {
 });
 
 app.get('/', function(req, res){
-	res.render('index.ejs');
-	logger.log('user', 'User enter');
+	res.render('index.ejs', {hostname: os.hostname()});
 });
 
 // on a socket connection
 io.sockets.on('connection', function (socket) {
-	socket.emit('news', { hello: 'world' });
+	logger.log('user', 'a user connected');
+
+	temporal.loop(1000, function() {
+		socket.emit('time', { raw: moment().format('LLLL')});
+	});
 
 	// if board is ready
 	if(board.isReady){

@@ -1,7 +1,7 @@
 var socket = io.connect('http://' + config.address + ':' + config.port);
 
-socket.on('news', function (data) {
-	console.log(data);
+socket.on('time', function (data) {
+	$("#time").html(data.raw);
 });
 
 socket.on('sensor', function (data) {
