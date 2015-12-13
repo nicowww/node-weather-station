@@ -14,6 +14,22 @@ socket.on('luminosity', function (data) {
 	$("#luminosity").html(data.raw);
 });
 
+socket.on('motionstart', function (data) {
+	$("#motiontext").html("KO");
+	$("#motionpicture").removeClass("fa-bell");
+	$("#motionpicture").addClass("fa-warning");
+	$("#motionstate").removeClass("navy-bg");
+	$("#motionstate").addClass("red-bg");
+});
+
+socket.on('motionend', function (data) {
+	$("#motiontext").html("OK");
+	$("#motionpicture").removeClass("fa-warning");
+	$("#motionpicture").addClass("fa-bell");
+	$("#motionstate").removeClass("red-bg");
+	$("#motionstate").addClass("navy-bg");
+});
+
 $('#ledSet').on('click',function(){
 	var tmp = parseInt($('#ledDelay').val(),10);
 	console.log("Setting LED Delay:",tmp);
